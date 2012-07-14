@@ -22,11 +22,13 @@ $(document).ready(function(){
 			text: $('#message').val()
 		});
 	});
-
 	socket.on('receive', function(message){
 		switch(message.action){
 		case 'send':
-			$('<li></li>').text(message.user + ': ' + message.text).appendTo('#log');
+			var line = $('<li class="line"></li>').append(
+				$('<span class="message"></span>').text(message.user + ': ' + message.text)
+			);
+			$('#log').append(line);
 		break;
 		case 'type':
 			$('#typing').text(message.user + 'さんがタイピング中');
@@ -36,6 +38,5 @@ $(document).ready(function(){
 			}, 3000);
 		break;
 		}
-	});
+	});	
 });
-

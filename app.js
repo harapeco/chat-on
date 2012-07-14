@@ -8,20 +8,19 @@ var express = require('express'),
 
 var router = require(config.server.module.router);
 
-
 // Server configuration
 var app = module.exports = express.createServer();
 
 console.dir(config.server.viewDir);
 app.configure(function(){
-  app.set('views', path.resolve(__dirname, config.server.viewDir));
-  app.set('view engine', config.common.viewEngine);
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser());
-  app.use(express.session(config.common.session));
-  app.use(app.router);
-  app.use(express.static(config.common.webroot));
+	app.set('views', path.resolve(__dirname, config.server.viewDir));
+	app.set('view engine', config.common.viewEngine);
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.cookieParser());
+	app.use(express.session(config.common.session));
+	app.use(app.router);
+	app.use(express.static(config.common.webroot));
 });
 
 app.configure('development', function(){
